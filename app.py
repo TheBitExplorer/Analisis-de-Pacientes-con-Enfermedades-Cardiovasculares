@@ -227,7 +227,12 @@ CORRECCIONES_DISTRITOS = {
     "GUARARA": "GUARARE",
 }
 
-gdf_mapa = gpd.read_file(f"zip://{MAP_ZIP.as_posix()}")
+
+gdf_mapa = gpd.read_file(
+    f"zip://{MAP_ZIP.as_posix()}",
+    layer="geoBoundaries-PAN-ADM2_simplified"
+)
+
 df_inec = pd.read_csv(INEC_CSV)
 
 gdf_mapa["distrito_mapa"] = (
