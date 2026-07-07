@@ -89,6 +89,15 @@ FEATURES_REG = [
     "cardio",
 ]
 
+FEATURES_CLS = [
+    "age",
+    "weight(kg)",
+    "ap_hi(mmHg)",
+    "cholesterol",
+    "gluc",
+    "active",
+]
+
 CORRELACION_AP_HI = {
     "ap_lo(mmHg)": 0.735960,
     "cardio": 0.428057,
