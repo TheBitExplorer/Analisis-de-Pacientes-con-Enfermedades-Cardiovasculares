@@ -561,6 +561,98 @@ app.layout = html.Div(
                 ),
 
                 html.Section(
+    [
+        html.H2("4. Predicción de estado cardiovascular"),
+
+        html.P(
+            "El control utiliza las variables empleadas "
+            "durante el entrenamiento del modelo de clasificación."
+        ),
+
+        html.Div(
+            [
+                campo_numero(
+                    "Edad (age)",
+                    "cls-age",
+                    50,
+                    1,
+                    120,
+                ),
+
+                campo_numero(
+                    "Peso en kg (weight)",
+                    "cls-weight",
+                    70,
+                    40,
+                    200,
+                    0.1,
+                ),
+
+                campo_numero(
+                    "Presión sistólica en mmHg (ap_hi)",
+                    "cls-ap-hi",
+                    120,
+                    60,
+                    249,
+                ),
+
+                campo_dropdown(
+                    "Colesterol",
+                    "cls-cholesterol",
+                    [
+                        {"label": "1 - Normal", "value": 1},
+                        {"label": "2 - Alto", "value": 2},
+                        {"label": "3 - Muy alto", "value": 3},
+                    ],
+                    1,
+                ),
+
+                campo_dropdown(
+                    "Glucosa",
+                    "cls-gluc",
+                    [
+                        {"label": "1 - Normal", "value": 1},
+                        {"label": "2 - Alta", "value": 2},
+                        {"label": "3 - Muy alta", "value": 3},
+                    ],
+                    1,
+                ),
+
+                campo_dropdown(
+                    "Actividad física",
+                    "cls-active",
+                    [
+                        {"label": "0 - No activo", "value": 0},
+                        {"label": "1 - Activo", "value": 1},
+                    ],
+                    1,
+                ),
+            ],
+            className="prediction-form",
+        ),
+
+        html.Button(
+            "Predecir estado cardiovascular",
+            id="btn-predecir-cardio",
+            n_clicks=0,
+            className="primary-button",
+        ),
+
+        html.Div(
+            id="resultado-clasificacion",
+            className="prediction-result",
+        ),
+
+        html.P(
+            "Modelo académico de clasificación. "
+            "El resultado no constituye un diagnóstico médico.",
+            className="small-note",
+        ),
+    ],
+    className="panel prediction-section",
+),
+
+                html.Section(
                     [
                         html.H2("4. Análisis sociodemográfico de Panamá"),
                         html.Div(
