@@ -23,6 +23,8 @@ MAP_ZIP = DATA_DIR / "geoBoundaries-PAN-ADM2-all.zip"
 INEC_CSV = DATA_DIR / "datos_inec_ingresos_distritos_limpio.csv"
 REG_MODEL = MODELS_DIR / "regresor_presion.pkl"
 REG_SCALER = MODELS_DIR / "scaler_regresor.pkl"
+CLS_MODEL = MODELS_DIR / "clasificador_cardio.pkl"
+CLS_SCALER = MODELS_DIR / "scaler_clasificador.pkl"
 
 ARCHIVOS_REQUERIDOS = [
     CARDIO_CSV,
