@@ -131,20 +131,35 @@ fig_correlacion.update_layout(height=700)
 
 
 # Sección 2: scatter presión sistólica vs diastólica
+
+# Muestra representativa para la visualización del dashboard
+df_scatter = df.sample(
+    n=min(5000, len(df)),
+    random_state=42
+)
+
 fig_presiones = px.scatter(
-    df,
+    df_scatter,
     x="ap_hi(mmHg)",
     y="ap_lo(mmHg)",
     color="Diagnóstico",
     symbol="Diagnóstico",
     opacity=0.7,
-    hover_data=["age", "weight(kg)", "cholesterol"],
+    hover_data=[
+        "age",
+        "weight(kg)",
+        "cholesterol"
+    ],
     labels={
         "ap_hi(mmHg)": "Presión sistólica (mmHg)",
         "ap_lo(mmHg)": "Presión diastólica (mmHg)",
         "Diagnóstico": "Diagnóstico",
     },
-    title="Relación entre la presión sistólica y diastólica según el diagnóstico",
+    title=(
+        "Relación entre la presión sistólica y "
+        "diastólica según el diagnóstico"
+    ),
+    render_mode="webgl",
 )
 
 
