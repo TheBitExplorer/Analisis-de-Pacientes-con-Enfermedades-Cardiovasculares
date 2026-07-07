@@ -53,6 +53,8 @@ if faltantes:
 df = pd.read_csv(CARDIO_CSV)
 modelo_regresion = joblib.load(REG_MODEL)
 scaler_regresion = joblib.load(REG_SCALER)
+modelo_clasificacion = joblib.load(CLS_MODEL)
+scaler_clasificacion = joblib.load(CLS_SCALER)
 
 df["Diagnóstico"] = df["cardio"].map({0: "Sano", 1: "Enfermo"})
 
