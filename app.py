@@ -799,6 +799,88 @@ def predecir_presion(
         ]
     )
 
+# ============================================================
+# CALLBACK: MODELO DE CLASIFICACIÓN
+# ============================================================
 
+@callback(
+    Output("resultado-clasificacion", "children"),
+    Input("btn-predecir-cardio", "n_clicks"),
+    State("cls-age", "value"),
+    State("cls-weight", "value"),
+    State("cls-ap-hi", "value"),
+    State("cls-cholesterol", "value"),
+    State("cls-gluc", "value"),
+    State("cls-active", "value"),
+    prevent_initial_call=True,
+)
+def predecir_estado_cardio(
+    n_clicks,
+    age,
+    weight,
+    ap_hi,
+    cholesterol,
+    gluc,
+    active,
+):
+
+    valores = [
+        age,
+        weight,
+        ap_hi,
+        cholesterol,
+        gluc,
+        active,
+    ]
+
+    if any(valor is None for valor in valores):
+        return html.P(
+            "Complete todos los campos antes de predecir."
+        )
+
+    instancia = pd.DataFrame(
+        [valores],
+        columns=FEATURES_CLS,
+    )
+
+    try:
+        instancia_escalada = scaler_clasificacion.transform(
+            instancia
+        )
+
+        prediccion = modelo_clasificacion.predict(
+            instancia_escalada
+        )[0]
+
+    except Exception as error:
+        return html.Div(
+            [
+                html.Strong(
+                    "No se pudo ejecutar la predicción."
+                ),
+                html.P(str(error)),
+            ]
+        )
+
+    if prediccion == 0:
+        resultado = (
+            "Alta probabilidad de que el paciente "
+            "se encuentre sano."
+        )
+    else:
+        resultado = (
+            "Alta probabilidad de que el paciente "
+            "presente enfermedad cardiovascular."
+        )
+
+    return html.Div(
+        [
+            html.H3(resultado),
+            html.P(
+                f"Clase predicha por el modelo: "
+                f"{int(prediccion)}"
+            ),
+        ]
+    )
 if __name__ == "__main__":
     app.run(debug=True)
